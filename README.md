@@ -1,6 +1,6 @@
 # TFG: Reconstrucción 3D mediante Triangulación e IA
-Trabajo de Fin de Grado — Grado en Ingeniería Aeroespacial  
-Escola de Enxeñaría Aeronáutica e do Espazo — Universidade de Vigo  
+Trabajo de Fin de Grado - Grado en Ingeniería Aeroespacial  
+Escola de Enxeñaría Aeronáutica e do Espazo - Universidade de Vigo  
 Autor: Pablo Gómez Campollo
 
 # Descripción
@@ -22,6 +22,7 @@ El proyecto se estructura en tres módulos principales:
   mediante ICP.
 
 # Estructura
+```
 TFG_R/
 ├── data/
 │   ├── raw/          #Imágenes de entrada
@@ -42,6 +43,7 @@ TFG_R/
 ├── .gitignore
 ├── README.md
 └── requirements.txt
+```
 
 # Instalación
 ```bash
