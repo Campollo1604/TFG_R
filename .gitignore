@@ -1,0 +1,18 @@
+#Entornos virtuales
+venv/
+.venv/
+env/
+
+#Archivos de salida
+data/output/
+*.ply
+
+#Modelos descargados automáticamente
+*.pt
+*.pth
+
+#Temporales de Python y editores
+__pycache__/
+*.pyc
+.vscode/
+.DS_Store
