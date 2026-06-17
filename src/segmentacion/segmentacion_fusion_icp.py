@@ -74,13 +74,12 @@ def emparejar(img1, img2, mask1, mask2, n_features=N_FEATURES, ratio=0.75):
     kp2, des2 = filtrar_kp(kp2_all, des2_all, mask2)
 
     print(f"Kps en objeto img1: {len(kp1)} | img2: {len(kp2)}")
-
-    flann = cv2.FlannBasedMatcher(
-        dict(algorithm=6, table_number=6, key_size=12, multi_probe_level=1),
-        dict(checks=50)
-    )
-    matches = flann.knnMatch(des1, des2, k=2)
-    mejores = [m for m, n in matches if m.distance < ratio * n.distance]
+ 
+    indice = dict(algorithm=6, table_number=6, key_size=12, multi_probe_level=1)
+    busqueda = dict(checks=50)
+    flann = cv2.FlannBasedMatcher(indice, busqueda)
+    knn_matches = flann.knnMatch(des1, des2, k=2)
+    mejores = [m for m, n in knn_matches if m.distance < ratio * n.distance]
 
     print(f"Matches validos: {len(mejores)}")
 

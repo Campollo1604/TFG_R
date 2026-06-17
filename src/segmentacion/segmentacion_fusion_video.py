@@ -110,12 +110,12 @@ def emparejar(img1, img2, mask1, mask2, n_features=N_FEATURES, ratio=0.75):
     if len(kp1) < 6 or len(kp2) < 6:
         raise RuntimeError("No hay suficientes keypoints en el objeto.")
 
-    flann = cv2.FlannBasedMatcher(
-        dict(algorithm=6, table_number=6, key_size=12, multi_probe_level=1),
-        dict(checks=50)
-    )
-    matches = flann.knnMatch(des1, des2, k=2)
-    mejores = [m for m, n in matches if m.distance < ratio * n.distance]
+    #FLANN + KNN + ratio test 
+    indice = dict(algorithm=6, table_number=6, key_size=12, multi_probe_level=1)
+    busqueda = dict(checks=50)
+    flann = cv2.FlannBasedMatcher(indice, busqueda)
+    knn_matches = flann.knnMatch(des1, des2, k=2)
+    mejores = [m for m, n in knn_matches if m.distance < ratio * n.distance]
 
     if len(mejores) < 6:
         raise RuntimeError("No hay suficientes matches")

@@ -29,10 +29,12 @@ def emparejar(img1, img2, n_features=N_FEATURES, ratio=0.75):
 
     print(f"Kps img1: {len(kp1)} | img2: {len(kp2)}")
 
-    #KNN + ratio test
-    bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=False)
-    knn = bf.knnMatch(des1, des2, k=2)
-    mejores = [m for m, n in knn if m.distance < ratio * n.distance]
+    #FLANN + KNN + ratio test 
+    indice = dict(algorithm=6, table_number=6, key_size=12, multi_probe_level=1)
+    busqueda = dict(checks=50)
+    flann = cv2.FlannBasedMatcher(indice, busqueda)
+    knn_matches = flann.knnMatch(des1, des2, k=2)
+    mejores = [m for m, n in knn_matches if m.distance < ratio * n.distance]
 
     print(f"Matches filtrados: {len(mejores)}")
     return kp1, kp2, gris1, mejores
